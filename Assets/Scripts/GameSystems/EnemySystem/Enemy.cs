@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -50,17 +46,17 @@ public class Enemy : MonoBehaviour
 
     public void Spawn(float _explosionTime, float _rotationSpeed)
     {
-        timeSinceStart = 0;
         explosionTime = _explosionTime;
         rotationSpeed = _rotationSpeed;
 
         moving = true;
+        transform.position = spawn.position;
         Show(true);
     }
 
     public void Explode()
     {
-        Debug.Log("Start Explosion");
+        timeSinceStart = 0;
         moving = false;
 
         Show(false);

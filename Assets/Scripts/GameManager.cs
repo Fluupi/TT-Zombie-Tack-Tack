@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
 
     public bool Running => running;
 
+    public void SayStg(string stg) => Debug.Log(stg);
+
     private void Start()
     {
         if (Random.Range(0, 2) == 0)
@@ -118,7 +120,6 @@ public class GameManager : MonoBehaviour
 
     public bool CanSpend(int amount)
     {
-        Debug.Log($"Money({money}), Checked Amount({amount})");
         return money >= amount;
     }
 

@@ -37,8 +37,7 @@ public class Shop : MonoBehaviour
     private void UpdateColorChoice(ColorOption option)
     {
         int colorIndex = Random.Range(0, availableColors.Length);
-
-        Debug.Log($"size = {availableColors.Length}, colorIndex = {colorIndex}");
+        
         while (availableColors[colorIndex] == option.Color)
         {
             Debug.Log(colorIndex);
