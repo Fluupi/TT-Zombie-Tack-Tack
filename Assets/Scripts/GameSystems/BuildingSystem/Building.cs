@@ -9,6 +9,17 @@ public class Building : MonoBehaviour
     public Color Color;
 
     [SerializeField] private BuildingPart[] parts;
+    public GameObject[] partGO()
+    {
+        List<GameObject> list = new List<GameObject>();
+
+        foreach (BuildingPart part in parts)
+        {
+            list.Add(part.gameObject);
+        }
+
+        return list.ToArray();
+    }
     private int currentPartInBuilding;
 
     public UnityEvent OnDestruction;
