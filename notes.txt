@@ -1,3 +1,5 @@
-Avec plus de temps j'aurais bien aimé
+Des choses j'aurais bien aimé ajouter par la suite
 
+-> les paramètres de niveaux (PV des bâtiments, durée des timers,
+vitesse d'apparition des ennemis, vitesse de rotation des ennemis, etc.) sous forme de ScriptableObjects
 -> un système de fabrique ou d'héritage pour le spawn d'ennemis
