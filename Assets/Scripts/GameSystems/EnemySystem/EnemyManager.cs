@@ -14,20 +14,21 @@ public class EnemyManager : MonoBehaviour
     [Header("Spawns")]
     [SerializeField] private Transform orangeSpawn;
     [SerializeField] private Transform[] redSpawns;
-
-    [Header("Orange Specifics")]
+    [Space]
     [SerializeField] private Color orangeColor;
-    [SerializeField] private CountDown orangeCountDown;
-    [SerializeField] private float minOrangeMoveDuration;
-    [SerializeField] private float maxOrangeMoveDuration;
-    [SerializeField] private float minOrangeRotationSpeed;
-    [SerializeField] private float maxOrangeRotationSpeed;
+    private float minOrangeMoveDuration;
+    private float maxOrangeMoveDuration;
+    private float minOrangeRotationSpeed;
+    private float maxOrangeRotationSpeed;
 
-    [Header("Red Specifics")]
-    [SerializeField] private float minRedMoveDuration;
-    [SerializeField] private float maxRedMoveDuration;
-    [SerializeField] private float minRedRotationSpeed;
-    [SerializeField] private float maxRedRotationSpeed;
+    private float minRedMoveDuration;
+    private float maxRedMoveDuration;
+    private float minRedRotationSpeed;
+    private float maxRedRotationSpeed;
+
+    [Space]
+    [SerializeField] private CountDown orangeCountDown;
+    [SerializeField] private CountDown redCountDown;
 
     private List<Enemy> enemies;
 
@@ -62,7 +63,9 @@ public class EnemyManager : MonoBehaviour
     {
         if(!GameManager.Instance.Running)
             return;
-        
+
+        Debug.Log("Spawn orange");
+
         enemies[0].gameObject.SetActive(true);
         enemies[0].Spawn(Random.Range(minOrangeMoveDuration, maxOrangeMoveDuration),
                          Random.Range(minOrangeRotationSpeed, maxOrangeRotationSpeed));
@@ -70,6 +73,7 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnReds()
     {
+        Debug.Log("Spawn reds");
         for (int i = 1; i < enemies.Count; i++)
         {
             enemies[i].gameObject.SetActive(true);
@@ -84,5 +88,13 @@ public class EnemyManager : MonoBehaviour
         {
             enemy.gameObject.SetActive(false);
         }
+    }
+
+    public void DataUpdate(GameMode gm)
+    {
+        minOrangeMoveDuration = gm.orangeMinEnemyMoveDuration;
+        maxOrangeMoveDuration = gm.orangeMaxEnemyMoveDuration;
+        minRedMoveDuration = gm.redMinEnemyMoveDuration;
+        maxRedMoveDuration = gm.redMaxEnemyMoveDuration;
     }
 }

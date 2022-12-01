@@ -7,12 +7,10 @@ using UnityEngine.UI;
 
 public class CountDown : MonoBehaviour
 {
-    [Header("Data")]
     [SerializeField] private bool autoRelaunch;
-    [SerializeField] private float timerDuration;
+    private float timerDuration;
     private bool isCounting;
     private float currentTime;
-    public float Progress => currentTime / timerDuration;
     public bool IsCounting => isCounting;
 
     [Header("Display needs")]
@@ -42,6 +40,11 @@ public class CountDown : MonoBehaviour
         isCounting = true;
     }
 
+    public void Stop()
+    {
+        isCounting = false;
+    }
+
     private void ResetTimer()
     {
         currentTime = 0;
@@ -61,7 +64,7 @@ public class CountDown : MonoBehaviour
         if (currentTime >= timerDuration)
         {
             currentTime = timerDuration;
-            isCounting = false;
+            Stop();
             OnCountEnd.Invoke();
         }
 
@@ -104,5 +107,10 @@ public class CountDown : MonoBehaviour
         {
             timerText.text += $"{(msValue < 10 ? "0" : "")}{msValue}";
         }
+    }
+
+    public void UpdateData(float _timerDuration)
+    {
+        timerDuration = _timerDuration;
     }
 }

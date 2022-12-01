@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private CountDown orangeCountDown;
     [SerializeField] private CountDown redCountDown;
+    public GameMode GameMode;
 
     [Space]
     [SerializeField] private float endPageLastingTime;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent OnConstruct;
     public UnityEvent OnStartGame;
+    public UnityEvent<GameMode> OnGameModeApplication;
     public UnityEvent OnDamageTaken;
     public UnityEvent<bool> OnEndGame;
     public UnityEvent<int> OnMoneyChange;
@@ -66,6 +68,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         running = true;
+        ApplyGameMode();
         OnStartGame.Invoke();
     }
 
@@ -79,17 +82,29 @@ public class GameManager : MonoBehaviour
     {
         EndEnemies();
         CheckBuildingSpeed();
+        StopTimers();
         OnEndGame.Invoke(true);
-        clicks = 0;
-        StartCoroutine(BackToMenu());
+        CommonEnd();
     }
 
     public void LoseEnd()
     {
         EndEnemies();
         OnEndGame.Invoke(false);
+        CommonEnd();
+    }
+
+    public void CommonEnd()
+    {
+        StopTimers();
         clicks = 0;
         StartCoroutine(BackToMenu());
+    }
+
+    public void StopTimers()
+    {
+        orangeCountDown.Stop();
+        redCountDown.Stop();
     }
 
     private IEnumerator BackToMenu()
@@ -105,11 +120,11 @@ public class GameManager : MonoBehaviour
 
     public void CheckBuildingSpeed()
     {
-        if (orangeCountDown.IsCounting && redCountDown.IsCounting)
-        {
-            money += fastBuildMoneyGain;
-            OnMoneyChange.Invoke(money);
-        }
+        if (!orangeCountDown.IsCounting || !redCountDown.IsCounting)
+            return;
+        
+        money += fastBuildMoneyGain;
+        OnMoneyChange.Invoke(money);
     }
 
     public void BuildUp(BuildingPart buildingPart)
@@ -131,5 +146,13 @@ public class GameManager : MonoBehaviour
         money -= amount;
         OnMoneyChange.Invoke(money);
         return true;
+    }
+
+    public void ApplyGameMode()
+    {
+        OnGameModeApplication.Invoke(GameMode);
+
+        orangeCountDown.UpdateData(GameMode.orangeTimerDuration);
+        redCountDown.UpdateData(GameMode.redTimerDuration);
     }
 }

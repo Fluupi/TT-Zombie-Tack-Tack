@@ -74,4 +74,11 @@ public class Building : MonoBehaviour
 
         OnDestruction.Invoke();
     }
+
+    public void DataUpdate(GameMode gm)
+    {
+        parts[0].UpdateClickNeed(gm.BuildingPartClickNeed_1);
+        parts[1].UpdateClickNeed(gm.BuildingPartClickNeed_2);
+        parts[2].UpdateClickNeed(gm.BuildingPartClickNeed_3);
+    }
 }

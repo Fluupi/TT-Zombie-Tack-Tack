@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3627014495b3b04d8df730d99aad1a2, type: 3}
+  m_Name: Simple
+  m_EditorClassIdentifier: 
+  BuildingPartClickNeed_1: 4
+  BuildingPartClickNeed_2: 5
+  BuildingPartClickNeed_3: 6
+  orangeTimerDuration: 4
+  orangeMinEnemyMoveDuration: 4
+  orangeMaxEnemyMoveDuration: 6
+  redTimerDuration: 20
+  redMinEnemyMoveDuration: 3
+  redMaxEnemyMoveDuration: 5

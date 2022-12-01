@@ -11,6 +11,7 @@ public class BuildingPart : MonoBehaviour
 {
     private Image image;
     private Color baseColor;
+    private int clickNeed;
 
     [SerializeField] private int maxLifePoints;
     [SerializeField] private int currentLifePoints;
@@ -18,7 +19,6 @@ public class BuildingPart : MonoBehaviour
 
     [SerializeField] private int moneyGain;
     public int MoneyGain => moneyGain;
-    [SerializeField] private int clickNeed;
     private int currentClicks;
     public bool IsComplete => currentClicks == clickNeed;
     public UnityEvent OnCompletion;
@@ -67,5 +67,10 @@ public class BuildingPart : MonoBehaviour
     {
         currentLifePoints--;
         UpdateDisplay();
+    }
+
+    public void UpdateClickNeed(int _clickNeed)
+    {
+        clickNeed = _clickNeed;
     }
 }
