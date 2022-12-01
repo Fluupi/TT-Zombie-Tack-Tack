@@ -1,2 +1,5 @@
-Ex1 Ecran d'accueil : 1h30
+Ex1 Ecran d'accueil : 1h30 (principalement la recherche sur comment mettre l'affichage de la 2nde caméra dans l'UI)
 Ex2 Builder : 30min
+Ex3 Ennemis : 1h
+Ex4 Conditions Victoire/Défaite : 1h
+Ex5  :

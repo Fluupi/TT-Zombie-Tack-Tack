@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CountDown redCountDown;
 
     [Space]
+    [SerializeField] private float endPageLastingTime;
     [SerializeField] private int money;
     [SerializeField] private int fastBuildMoneyGain;
 
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnConstruct;
     public UnityEvent OnStartGame;
     public UnityEvent OnDamageTaken;
-    public UnityEvent OnEndGame;
+    public UnityEvent<bool> OnEndGame;
     public UnityEvent<int> OnMoneyChange;
 
     public bool Running => running;
@@ -76,13 +77,23 @@ public class GameManager : MonoBehaviour
     {
         EndEnemies();
         CheckBuildingSpeed();
-        EndGame();
+        OnEndGame.Invoke(true);
+        clicks = 0;
+        StartCoroutine(BackToMenu());
     }
 
     public void LoseEnd()
     {
         EndEnemies();
-        EndGame();
+        OnEndGame.Invoke(false);
+        clicks = 0;
+        StartCoroutine(BackToMenu());
+    }
+
+    private IEnumerator BackToMenu()
+    {
+        yield return new WaitForSeconds(endPageLastingTime);
+        uiManager.ShowMenu();
     }
 
     public void EndEnemies()
@@ -97,12 +108,6 @@ public class GameManager : MonoBehaviour
             money += fastBuildMoneyGain;
             OnMoneyChange.Invoke(money);
         }
-    }
-
-    public void EndGame()
-    {
-        OnEndGame.Invoke();
-        clicks = 0;
     }
 
     public void BuildUp(BuildingPart buildingPart)
