@@ -1,0 +1,3 @@
+Avec plus de temps j'aurais bien aimé
+
+-> un système de fabrique ou d'héritage pour le spawn d'ennemis
